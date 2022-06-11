@@ -105,10 +105,14 @@ class OdnomastkaDurak:
                 self.change_position(self.pole)
                 self.pole = -1
         else:
+            is_finded = False
             for i in range(self.size):
                 if self.names_of_cards[i] == pos:
                     pos = i
+                    is_finded = True
                     break
+            if not is_finded:
+                return -1
             if self.pole == -1:
                 if not self.has_player_position(pos, 0):
                     return -1
