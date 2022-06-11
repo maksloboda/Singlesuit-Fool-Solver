@@ -24,15 +24,12 @@ class OdnomastkaDurak:
         self.cards += self.degrees[self.size]  # обозначает начало
         if player == 1:
             self.change_player()  # теперь считаем, что первый ходит игрок 0
+        self.build_moves_tree()
 
     def who_wins(self):
-        if self.moves_tree.get(self.cards) is None:
-            self.build_moves_tree()
         return (self.moves_tree[self.cards].who_wins + self.reverse) % 2
 
     def winning_score(self):
-        if self.moves_tree.get(self.cards) is None:
-            self.build_moves_tree()
         return self.moves_tree[self.cards].winning_score
 
     def has_player_position(self, pos, player):
@@ -64,8 +61,6 @@ class OdnomastkaDurak:
         return (self.cards == self.degrees[self.size] or self.cards == (self.degrees[self.size + 1] - 1))
 
     def move_by_computer(self):
-        if self.moves_tree.get(self.cards) is None:
-            self.build_moves_tree()
         if self.is_end():
             return -1  # игра окончена
         if self.pole == -1:
@@ -258,8 +253,6 @@ class OdnomastkaDurak:
 
 class OdnomastkaD_Durak(OdnomastkaDurak):
     def who_wins(self):
-        if self.moves_tree.get(self.cards) is None:
-            self.build_moves_tree()
         if self.winning_score() == 0:
             return 2
         return (self.moves_tree[self.cards].who_wins + self.reverse) % 2
@@ -282,15 +275,12 @@ class OdnomastkaDurakWithWeights(OdnomastkaDurak):
         self.cards += self.degrees[self.size]  # обозначает начало
         if player == 1:
             self.change_player()  # теперь считаем, что первый ходит игрок 0
+        self.build_moves_tree()
 
     def who_wins(self):
-        if self.moves_tree.get((self.cards, self.weights)) is None:
-            self.build_moves_tree()
         return (self.moves_tree[(self.cards, self.weights)].who_wins + self.reverse) % 2
 
     def winning_score(self):
-        if self.moves_tree.get((self.cards, self.weights)) is None:
-            self.build_moves_tree()
         return self.moves_tree[(self.cards, self.weights)].winning_score
 
     def remove(self, pos1, pos2):
@@ -311,8 +301,6 @@ class OdnomastkaDurakWithWeights(OdnomastkaDurak):
         self.size += 2
 
     def move_by_computer(self):
-        if self.moves_tree.get((self.cards, self.weights)) is None:
-            self.build_moves_tree()
         if self.is_end():
             return -1  # игра окончена
         now = (self.cards, self.weights)
@@ -446,8 +434,6 @@ class OdnomastkaDurakWithWeights(OdnomastkaDurak):
 
 class OdnomastkaD_DurakWithWeights(OdnomastkaDurakWithWeights):
     def who_wins(self):
-        if self.moves_tree.get((self.cards, self.weights)) is None:
-            self.build_moves_tree()
         if self.winning_score() == 0:
             return 2
         return (self.moves_tree[(self.cards, self.weights)].who_wins + self.reverse) % 2
