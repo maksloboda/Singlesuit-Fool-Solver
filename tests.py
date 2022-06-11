@@ -26,6 +26,7 @@ def test_legacy_compvcomp(test_case: unittest.TestCase, solver_class):
       test_case.assertEqual(predicted_winner, solver.who_wins())
       test_case.assertEqual(winning_score, solver.winning_score())
       move = solver.move_by_computer()
+    test_case.assertTrue(tracker.is_end())
   
 
 class TestLegacySolversCompvComp(unittest.TestCase):

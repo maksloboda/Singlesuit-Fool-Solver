@@ -18,7 +18,6 @@ class GameTracker:
     self.cards = cards_
     self.current_player = current_player_
     self.field = -1
-    self.scores = [0, 0]
   
   def apply_move(self, move_value):
     # Card should be valid
@@ -44,3 +43,12 @@ class GameTracker:
         # Beat the card
         self.field = -1
       self.cards[move_value - 1] = None
+
+  def is_end(self):
+    values = set(self.cards)
+    has_zero = (0 in values)
+    has_one = (1 in values)
+    if (not has_zero or not has_one) and self.field == -1:
+      return True
+    print(self.cards, self.field)
+    return False
