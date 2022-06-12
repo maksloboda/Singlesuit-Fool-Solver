@@ -1,5 +1,5 @@
-from .legacy import solvers
-from .classtypes.game_state import GameState, EMPTY_FIELD
+from legacy import solvers
+from classtypes.game_state import GameState, EMPTY_FIELD
 from typing import Any, Tuple, List
 import itertools
 
