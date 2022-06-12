@@ -1,5 +1,5 @@
-import legacy.solvers
-from classtypes.game_state import GameState, EMPTY_FIELD
+from .legacy import solvers
+from .classtypes.game_state import GameState, EMPTY_FIELD
 from typing import Any, Tuple, List
 import itertools
 
@@ -50,7 +50,7 @@ def find_optimal_move_generic(state: GameState, solver_class) -> int:
   return cards[idx - 1]
 
 def find_optimal_move_fool(state: GameState) -> int:
-  return find_optimal_move_generic(state, legacy.solvers.OdnomastkaDurak)
+  return find_optimal_move_generic(state, solvers.OdnomastkaDurak)
 
 def find_optimal_move_dfool(state: GameState) -> int:
-  return find_optimal_move_generic(state, legacy.solvers.OdnomastkaD_Durak)
+  return find_optimal_move_generic(state, solvers.OdnomastkaD_Durak)
