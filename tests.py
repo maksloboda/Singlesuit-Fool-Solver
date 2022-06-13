@@ -1,9 +1,10 @@
 import unittest
+from classtypes.game_state import GameState
 import legacy.solvers
 from typing import List, Tuple
 from test_util.random_state_picker import generate_random_state
 from test_util.game_tracker import GameTracker
-from solvers import find_optimal_move_generic
+from solvers import find_optimal_move_generic, find_optimal_move_fool
 
 tested_sizes = [2, 3, 4, 5, 6]
 repeats = 10000
@@ -59,6 +60,16 @@ class TestLegacySolversCompvComp(unittest.TestCase):
     test_legacy_compvcomp(self, legacy.solvers.OdnomastkaD_Durak)
 
 class TestNewSolver(unittest.TestCase):
+
+  def test_simple_fool(self):
+    gs = GameState(0, [1, 3], [2, 4], -1)
+    self.assertEqual(find_optimal_move_fool(gs), 3)
+    gs = GameState(1, [1], [2, 4], 3)
+    self.assertEqual(find_optimal_move_fool(gs), 4)
+    gs = GameState(0, [1], [2], -1)
+    self.assertEqual(find_optimal_move_fool(gs), 1)
+    gs = GameState(1, [], [2], 1)
+    self.assertEqual(find_optimal_move_fool(gs), 2)
 
   def test_fool(self):
     test_new_solver(self, legacy.solvers.OdnomastkaDurak)

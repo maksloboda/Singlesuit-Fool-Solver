@@ -8,7 +8,7 @@ def prepare_legacy_solver(state: GameState, solver_class) -> Tuple[Any, List[int
   Returns a solver that is in the provided state and a sorted list of cards
   """
   other_player = 1 - state.current_player
-  extra_card = [(state.field - 1, other_player)] if state.field is not EMPTY_FIELD else []
+  extra_card = [(state.field, other_player)] if state.field is not EMPTY_FIELD else []
   # An array of (card_number, owner)
   card_info = list(
       sorted(

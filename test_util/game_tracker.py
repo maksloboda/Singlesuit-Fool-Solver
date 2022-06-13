@@ -33,7 +33,9 @@ class GameTracker:
       filter(lambda x: x[1] == 1, card_info)
     ))
 
-    return GameState(self.current_player, first_player_set, second_player_set, self.field)
+    field = self.field - 1 if self.field != EMPTY_FIELD else EMPTY_FIELD
+
+    return GameState(self.current_player, first_player_set, second_player_set, field)
 
   def apply_move(self, move_value):
     # Card should be valid
