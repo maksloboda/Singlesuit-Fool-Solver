@@ -66,9 +66,9 @@ class TestNewSolver(unittest.TestCase):
     self.assertEqual(find_optimal_move_fool(gs), 3)
     gs = GameState(1, [1], [2, 4], 3)
     self.assertEqual(find_optimal_move_fool(gs), 4)
-    gs = GameState(0, [1], [2], -1)
-    self.assertEqual(find_optimal_move_fool(gs), 1)
-    gs = GameState(1, [], [2], 1)
+    gs = GameState(1, [1], [2], -1)
+    self.assertEqual(find_optimal_move_fool(gs), 2)
+    gs = GameState(0, [1], [], 2)
     self.assertEqual(find_optimal_move_fool(gs), 2)
 
   def test_fool(self):
