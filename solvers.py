@@ -24,7 +24,10 @@ def prepare_legacy_solver(state: GameState, solver_class) -> Tuple[Any, List[int
   # Decide if we should make the fake move
   start_player = other_player if extra_card else state.current_player
 
-  solver = solver_class(card_owners, start_player)
+  if solver_class == solvers.OdnomastkaDurakWithWeights or solver_class == solvers.OdnomastkaD_DurakWithWeights:
+    solver = solver_class(card_owners, start_player, state.weights)
+  else:
+    solver = solver_class(card_owners, start_player)
 
   if extra_card:
     # make the fake move
@@ -54,3 +57,10 @@ def find_optimal_move_fool(state: GameState) -> int:
 
 def find_optimal_move_dfool(state: GameState) -> int:
   return find_optimal_move_generic(state, solvers.OdnomastkaD_Durak)
+
+def find_optimal_move_fool_weighted(state: GameState) -> int:
+  return find_optimal_move_generic(state, solvers.OdnomastkaDurakWithWeights)
+
+def find_optimal_move_dfool_weighted(state: GameState) -> int:
+  return find_optimal_move_generic(state, solvers.OdnomastkaD_DurakWithWeights)
+  
